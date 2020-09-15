@@ -31,7 +31,9 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
+
         final int id = getIntent().getIntExtra("id", -1);
+        setTitle(id + "번 게시물");
 
         textViewId = findViewById(R.id.activity_detail__textViewId);
         textViewRegDate = findViewById(R.id.activity_detail__textViewRegDate);

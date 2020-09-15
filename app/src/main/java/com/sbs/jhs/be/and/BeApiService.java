@@ -12,4 +12,7 @@ public interface BeApiService {
     Observable<ResultData<BeApi__UsrArticle__getArticle__Body>> UsrArticle__getArticle(@Query("id") int id);
     @POST("/usr/article/doDeleteArticle")
     Observable<ResultData> UsrArticle__doDeleteArticle(@Query("id") int id);
+
+    @POST("/usr/article/doAddArticle")
+    Observable<ResultData> UsrArticle__doAddArticle(@Query("boardId") int boardId,@Query("title") String title,@Query("body") String body);
 }
