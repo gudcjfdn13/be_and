@@ -15,9 +15,6 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AddActivity extends AppCompatActivity {
     private static final String TAG = "AddActivity";
@@ -38,14 +35,7 @@ public class AddActivity extends AppCompatActivity {
         editTextBody = findViewById(R.id.activity_add__editTextBody);
         btnDoAdd = findViewById(R.id.activity_add__btnDoAdd);
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://39.119.128.155:8089")
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-                .build();
-
-        BeApiService beApiService = retrofit.create(BeApiService.class);
-
+        BeApiService beApiService = App.getBeApiService();
 
         btnDoAdd.setOnClickListener(v -> {
             int boardId = 1;
