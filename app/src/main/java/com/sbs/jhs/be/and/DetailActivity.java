@@ -10,6 +10,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
@@ -46,10 +47,12 @@ public class DetailActivity extends AppCompatActivity {
             builder.setTitle(id + "번 글을 삭제합니다").setMessage("정말 삭제하시겠습니까?");
 
             builder.setPositiveButton("예", (dialog, which) -> {
-                Observable<ResultData> observable__UsrArticle__doDeleteArticleResultData = beApiService.UsrArticle__doDeleteArticle(id);
+                Observable<ResultData<Map<String, Object>>> observable__UsrArticle__doDeleteArticleResultData = beApiService.UsrArticle__doDeleteArticle(id);
 
                 mCompositeDisposable.add(observable__UsrArticle__doDeleteArticleResultData.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(resultData -> {
-                    Toast.makeText(getApplicationContext(), id + "번 글 삭제 완료", Toast.LENGTH_SHORT).show();
+                    int deleteId = Util.getAsInt(resultData.body.get("id"));
+
+                    Toast.makeText(getApplicationContext(), deleteId + "번 글 삭제 완료", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(DetailActivity.this, MainActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
@@ -59,7 +62,8 @@ public class DetailActivity extends AppCompatActivity {
                 }));
             });
 
-            builder.setNegativeButton("아니요", (dialog, which) -> {});
+            builder.setNegativeButton("아니요", (dialog, which) -> {
+            });
 
             AlertDialog alertDialog = builder.create();
             alertDialog.show();
