@@ -9,7 +9,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.List;
 import java.util.Map;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -20,7 +19,6 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 public class AddActivity extends AppCompatActivity {
     private static final String TAG = "AddActivity";
     private CompositeDisposable mCompositeDisposable = new CompositeDisposable();
-    private List<Article> articles;
     private EditText editTextTitle, editTextBody;
     private Button btnDoAdd;
 
@@ -60,7 +58,7 @@ public class AddActivity extends AppCompatActivity {
             Observable<ResultData<Map<String, Object>>> observable__UsrArticle__doAddArticleResultData = beApiService.UsrArticle__doAddArticle(boardId, title, body);
             mCompositeDisposable.add(observable__UsrArticle__doAddArticleResultData.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(resultData -> {
                 int addId = Util.getAsInt(resultData.body.get("id"));
-                Toast.makeText(getApplicationContext(), addId + "번 글 작성 완료", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), addId + "번 글 작성완료", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(AddActivity.this, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
