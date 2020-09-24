@@ -22,9 +22,9 @@ import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class MainActivity extends AppCompatActivity {
+public class ListActivity extends AppCompatActivity {
 
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "ListActivity";
     private CompositeDisposable mCompositeDisposable = new CompositeDisposable();
     private List<Article> articles;
     private RecyclerView1Adapter recyclerView1Adapter;
@@ -33,14 +33,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_list);
 
         setTitle("게시물 리스트");
 
         btnAdd = findViewById(R.id.activity_main__btnAdd);
 
         btnAdd.setOnClickListener(v -> {
-            startActivity(new Intent(MainActivity.this, AddActivity.class));
+            startActivity(new Intent(ListActivity.this, AddActivity.class));
         });
         articles = new ArrayList<>();
 
@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
                 buttonToGoDetail.setOnClickListener(view -> {
                     int id = (int) view.getTag();
 
-                    Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+                    Intent intent = new Intent(ListActivity.this, DetailActivity.class);
                     intent.putExtra("id", id);
                     startActivity(intent);
                 });

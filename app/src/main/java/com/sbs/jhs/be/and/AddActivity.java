@@ -59,7 +59,7 @@ public class AddActivity extends AppCompatActivity {
             mCompositeDisposable.add(observable__UsrArticle__doAddArticleResultData.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(resultData -> {
                 int addId = Util.getAsInt(resultData.body.get("id"));
                 Toast.makeText(getApplicationContext(), addId + "번 글 작성완료", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(AddActivity.this, MainActivity.class);
+                Intent intent = new Intent(AddActivity.this, ListActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }, throwable -> {
