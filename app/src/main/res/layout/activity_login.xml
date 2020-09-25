@@ -8,14 +8,14 @@
     android:orientation="vertical">
 
     <EditText
-        android:id="@+id/activity_login__loginId"
+        android:id="@+id/activity_login__editTextLoginId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="ID"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
     <EditText
-        android:id="@+id/activity_login__loginPw"
+        android:id="@+id/activity_login__editTextLoginPw"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="PW"
@@ -36,7 +36,7 @@
             android:id="@+id/activity_login__btnJoin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="로그인" />
+            android:text="회원가입" />
 
     </LinearLayout>
 

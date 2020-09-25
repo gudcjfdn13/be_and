@@ -28,7 +28,7 @@ public class ListActivity extends AppCompatActivity {
     private CompositeDisposable mCompositeDisposable = new CompositeDisposable();
     private List<Article> articles;
     private RecyclerView1Adapter recyclerView1Adapter;
-    private Button btnAdd;
+    private Button btnAdd, btnDoLogout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +37,15 @@ public class ListActivity extends AppCompatActivity {
 
         setTitle("게시물 리스트");
 
-        btnAdd = findViewById(R.id.activity_main__btnAdd);
+        btnDoLogout = findViewById(R.id.activity_list__btnDoLogout);
+
+        btnDoLogout.setOnClickListener(v -> {
+            AppDatabase.removeLoginAuthKey();
+            Toast.makeText(getApplicationContext(), "로그아웃", Toast.LENGTH_SHORT).show();
+            moveToLogin();
+        });
+
+        btnAdd = findViewById(R.id.activity_list__btnAdd);
 
         btnAdd.setOnClickListener(v -> {
             startActivity(new Intent(ListActivity.this, AddActivity.class));
@@ -59,13 +67,20 @@ public class ListActivity extends AppCompatActivity {
             Log.e(TAG, throwable.getMessage(), throwable);
         }));
 
-        RecyclerView recyclerView1 = findViewById(R.id.activity_main__recyclerView1);
+        RecyclerView recyclerView1 = findViewById(R.id.activity_list__recyclerView1);
 
         recyclerView1.setHasFixedSize(true);
 
         recyclerView1Adapter = new RecyclerView1Adapter();
         recyclerView1.setAdapter(recyclerView1Adapter);
     } // onCreate()
+
+    private void moveToLogin() {
+
+        Intent intent = new Intent(ListActivity.this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        startActivity(intent);
+    }
 
     private class RecyclerView1Adapter extends RecyclerView.Adapter<RecyclerView1Adapter.ViewHolder> {
         @NonNull
